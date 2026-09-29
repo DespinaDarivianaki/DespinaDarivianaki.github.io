@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Χώρος για να χωρέσεις | Δέσποινα Δαριβianάκη</title>
+  <title>Χώρος για να χωρέσεις | Δέσποινα Δαριβιανάκη</title>
   
   <!-- Εισαγωγή γραμματοσειρών -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -139,16 +139,31 @@
       color: var(--heading);
     }
 
-    /* 1. ΕΙΚΟΝΑ ΦΟΝΤΟΥ / BANNER (Σημείο που πιάνει φόντο) */
+    /* 1. ΕΙΚΟΝΑ ΦΟΝΤΟΥ / HERO BANNER ΜΕ FADE IN & ΧΡΩΜΑΤΙΚΟ ΠΕΠΛΟ */
     .hero-banner {
       width: 100%;
-      height: 220px;
-      border-radius: 12px;
+      height: 240px;
+      border-radius: 14px;
       overflow: hidden;
       margin: 2rem 0 3.5rem;
       position: relative;
       border: 1px solid var(--border);
-      box-shadow: 0 4px 16px rgba(61, 53, 46, 0.06);
+      box-shadow: 0 8px 24px rgba(61, 53, 46, 0.06);
+      background-color: var(--quote-bg);
+      animation: bannerFadeIn 1.4s ease-out forwards;
+    }
+
+    .hero-banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg, 
+        rgba(250, 246, 240, 0.45) 0%, 
+        rgba(179, 107, 76, 0.35) 100%
+      );
+      mix-blend-mode: multiply;
+      pointer-events: none;
     }
 
     .hero-banner img {
@@ -156,6 +171,23 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      filter: sepia(20%) contrast(95%) brightness(96%);
+      transition: transform 0.8s ease;
+    }
+
+    .hero-banner:hover img {
+      transform: scale(1.02);
+    }
+
+    @keyframes bannerFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* SCROLL REVEAL */
@@ -274,6 +306,71 @@
       letter-spacing: 0.02em;
     }
 
+    /* 3. ΕΙΔΙΚΟ BLOCKQUOTE BOJACK HORSEMAN */
+    .bojack-quote-card {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background-color: var(--quote-bg);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 12px 12px 0;
+      padding: 1.4rem 1.6rem;
+      margin: 2.4rem 0;
+      box-shadow: 0 4px 14px rgba(61, 53, 46, 0.04);
+    }
+
+    .bojack-avatar {
+      flex-shrink: 0;
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      border: 3px solid #ffffff;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(61, 53, 46, 0.12);
+      background-color: #ffffff;
+    }
+
+    .bojack-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .bojack-quote-content {
+      flex: 1;
+    }
+
+    .bojack-quote-text {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.18rem;
+      font-style: italic;
+      color: var(--heading);
+      line-height: 1.5;
+      margin-bottom: 0.4rem;
+    }
+
+    .bojack-sub {
+      font-size: 0.88rem;
+      color: #6d6257;
+      line-height: 1.4;
+    }
+
+    .bojack-author {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.92rem;
+      margin-top: 0.3rem;
+      display: inline-block;
+    }
+
+    @media (max-width: 550px) {
+      .bojack-quote-card {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
     .highlight-box {
       background-color: var(--card-bg);
       border-left: 4px solid var(--primary);
@@ -310,7 +407,7 @@
       transform: translateY(-1px);
     }
 
-    /* 3. BOJACK HORSEMAN & ΚΟΥΙΖ SECTION */
+    /* ΔΙΑΔΡΑΣΤΙΚΟ ΠΑΙΧΝΙΔΙ / ΚΟΥΙΖ */
     .quiz-section {
       background-color: var(--card-bg);
       border: 1px solid var(--border);
@@ -318,59 +415,6 @@
       padding: 2.5rem 2rem;
       margin: 3.5rem 0;
       box-shadow: 0 6px 20px rgba(61, 53, 46, 0.04);
-      position: relative;
-    }
-
-    .bojack-intro-card {
-      display: flex;
-      align-items: center;
-      gap: 1.4rem;
-      background-color: var(--quote-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.2rem 1.5rem;
-      margin-bottom: 2.2rem;
-    }
-
-    .bojack-avatar {
-      flex-shrink: 0;
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      border: 3px solid #ffffff;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(61, 53, 46, 0.15);
-      background-color: #ffffff;
-    }
-
-    .bojack-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .bojack-text {
-      font-size: 0.98rem;
-      line-height: 1.6;
-      color: var(--heading);
-      font-style: italic;
-    }
-
-    .bojack-text strong {
-      display: block;
-      font-style: normal;
-      font-family: "Playfair Display", Georgia, serif;
-      font-size: 1.08rem;
-      color: var(--primary);
-      margin-bottom: 0.2rem;
-    }
-
-    @media (max-width: 550px) {
-      .bojack-intro-card {
-        flex-direction: column;
-        text-align: center;
-      }
     }
 
     .quiz-header {
@@ -585,7 +629,7 @@
         <strong>Συστημική Ψυχοθεραπεία:</strong> Μια συνάντηση πέρα από ετικέτες, όπου το σύμπτωμα ακούγεται και φροντίζεται από κοινού.
       </div>
 
-      <!-- 1. ΕΙΚΟΝΑ ΦΟΝΤΟΥ / HERO BANNER -->
+      <!-- 1. ΕΙΚΟΝΑ ΦΟΝΤΟΥ / HERO BANNER (Fade in & Χρωματικό Πέπλο) -->
       <div class="hero-banner">
         <img src="banner-bg.jpg" alt="Χώρος για να χωρέσεις" onerror="this.src='https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=80'">
       </div>
@@ -623,7 +667,7 @@
         </p>
       </section>
 
-      <!-- ΕΝΟΤΗΤΑ 2: Το Σύγχρονο Τοπίο -->
+      <!-- ΕΝΟΤΗΤΑ 2: Το Σύγχρονο Τοπίο & BoJack Horseman Quote -->
       <section class="reveal-section">
         <h2>Το Άτομο μέσα στο Σύγχρονο Τοπίο</h2>
         <p class="drop-cap">
@@ -632,6 +676,22 @@
         <p>
           Μέσα σε αυτό το πλαίσιο, αν κάποια δυσκολία ή σύμπτωμα μας καταστήσει «μη παραγωγικές», η απάντηση είναι συχνά η περιθωριοποίηση και η παθολογικοποίηση: γρήγορες διαγνώσεις, ειδικοί-αυθεντίες και μια εκτεταμένη ιατρικοποίηση του ανθρώπινου πόνου. Παράλληλα, γινόμαστε μάρτυρες μιας εποχής όπου η ψυχοθεραπεία κινδυνεύει, η θεραπευτική πράξη συμπυκνώνεται σε αποφθέγματα στα σόσιαλ μίντια και η ανάγκη για σύνδεση εκχωρείται σε αλγορίθμους τεχνητής νοημοσύνης.
         </p>
+
+        <!-- 3. ΤΟ ΑΠΟΦΘΕΓΜΑ ΤΟΥ BOJACK HORSEMAN ΕΔΩ -->
+        <div class="bojack-quote-card">
+          <div class="bojack-avatar">
+            <img src="bojack.png" alt="BoJack Horseman" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/d/dc/BoJack_Horseman_character.png'">
+          </div>
+          <div class="bojack-quote-content">
+            <div class="bojack-quote-text">
+              «In this terrifying world, all we have is the connections we make.»
+            </div>
+            <div class="bojack-sub">
+              <em>(Σε αυτόν τον τρομακτικό κόσμο, το μόνο που έχουμε είναι οι συνδέσεις που δημιουργούμε.)</em>
+            </div>
+            <span class="bojack-author">— BoJack Horseman</span>
+          </div>
+        </div>
       </section>
 
       <!-- ΕΝΟΤΗΤΑ 3: Η Θεραπευτική Ματιά -->
@@ -704,20 +764,8 @@
         </p>
       </section>
 
-      <!-- ΔΙΑΔΡΑΣΤΙΚΟ ΠΑΙΧΝΙΔΙ / ΚΟΥΙΖ ΜΕ BOJACK -->
+      <!-- ΔΙΑΔΡΑΣΤΙΚΟ ΠΑΙΧΝΙΔΙ / ΚΟΥΙΖ (ΚΑΘΑΡΟ, ΧΩΡΙΣ BOJACK ΕΔΩ) -->
       <section class="quiz-section reveal-section" id="quiz">
-        
-        <!-- 3. ΠΑΙΧΝΙΔΙΑΡΙΚΗ ΕΙΣΑΓΩΓΗ ΜΕ BOJACK HORSEMAN -->
-        <div class="bojack-intro-card">
-          <div class="bojack-avatar">
-            <img src="bojack.png" alt="BoJack Horseman" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/d/dc/BoJack_Horseman_character.png'">
-          </div>
-          <div class="bojack-text">
-            <strong>«It gets easier. Every day it gets a little easier...»</strong>
-            Μερικές φορές είναι δύσκολο να βάλεις λέξεις σε αυτό που νιώθεις. Ας αφήσουμε για λίγο στην άκρη τις εξηγήσεις κι ας παίξουμε με εικόνες.
-          </div>
-        </div>
-
         <div class="quiz-header">
           <h2>Διάλεξε μια εικόνα: Πώς νιώθεις μέσα στον κόσμο σήμερα;</h2>
           <p>Μια μικρή παύση αναστοχασμού μέσα από σύμβολα, μεταφορές και αισθήσεις.</p>
@@ -859,7 +907,7 @@
         </a>
 
         <!-- Email -->
-        <a href="mailto:despinadari@gmail.com" class="social-link" title="Email">
+        <a href="mailto:darivianaki.despina@gmail.com" class="social-link" title="Email">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/>
           </svg>
