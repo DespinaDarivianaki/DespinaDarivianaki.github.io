@@ -16,8 +16,8 @@
       --text: #3d352e;         /* Σκούρο ανθρακί/καφέ για άνετο διάβασμα */
       --heading: #26211c;      /* Βαθύ καφέ-μαύρο για τίτλους */
       --primary: #b36b4c;      /* Γήινη τερρακότα / κεραμιδί */
-      --primary-hover: #965337;/* Σκούρα τερρακότα στο πέρασμα του ποντικιού */
-      --card-bg: #ffffff;      /* Λευκό φόντο για τα κουτιά έμφασης */
+      --primary-hover: #965337;/* Σκούρα τερρακότα στο hover */
+      --card-bg: #ffffff;      /* Λευκό φόντο για τα κουτιά έμφασης & κάρτες */
       --border: #eadfce;       /* Διακριτική γραμμή διαχωρισμού */
       --quote-bg: #f2e9dc;     /* Ζεστό απαλό φόντο για το απόφθεγμα */
     }
@@ -139,11 +139,158 @@
       font-weight: 500;
       border-radius: 30px;
       transition: background-color 0.2s ease, transform 0.15s ease;
+      cursor: pointer;
+      border: none;
     }
 
     .cta-btn:hover {
       background-color: var(--primary-hover);
       transform: translateY(-1px);
+    }
+
+    /* --- ΔΙΑΔΡΑΣΤΙΚΟ ΠΑΙΧΝΙΔΙ / ΚΟΥΙΖ --- */
+    .quiz-section {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      margin: 4.5rem 0 3rem;
+      box-shadow: 0 6px 20px rgba(61, 53, 46, 0.04);
+    }
+
+    .quiz-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .quiz-header h2 {
+      border-bottom: none;
+      margin-top: 0;
+      font-size: 1.65rem;
+      display: block;
+    }
+
+    .quiz-header p {
+      color: #6d6257;
+      font-size: 1rem;
+      margin-bottom: 0;
+    }
+
+    .quiz-step {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .quiz-step.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-counter {
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .step-question {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--heading);
+      margin-bottom: 1.5rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 580px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .option-card {
+      background-color: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .option-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(179, 107, 76, 0.12);
+    }
+
+    .option-icon {
+      font-size: 2rem;
+    }
+
+    .option-label {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--heading);
+    }
+
+    /* Τελικό Αποτέλεσμα Κουίζ */
+    .quiz-result {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .quiz-result.active {
+      display: block;
+    }
+
+    .chosen-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1.5rem 0 2rem;
+      justify-content: center;
+    }
+
+    .chip {
+      background-color: var(--quote-bg);
+      border: 1px solid var(--border);
+      color: var(--heading);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .reset-btn {
+      background: none;
+      border: none;
+      color: #8c8074;
+      text-decoration: underline;
+      font-size: 0.9rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      font-family: inherit;
+    }
+
+    .reset-btn:hover {
+      color: var(--heading);
     }
 
     footer {
@@ -286,9 +433,119 @@
         </p>
       </section>
 
-      <div class="cta-container">
-        <a href="mailto:darivianaki.despina@gmail.com" class="cta-btn">Επικοινωνία για συνεδρία</a>
-      </div>
+      <!-- ΔΙΑΔΡΑΣΤΙΚΟ ΠΑΙΧΝΙΔΙ / ΚΟΥΙΖ -->
+      <section class="quiz-section" id="quiz">
+        <div class="quiz-header">
+          <h2>Διάλεξε μια εικόνα: Πώς νιώθεις μέσα στον κόσμο σήμερα;</h2>
+          <p>Μια μικρή παύση αναστοχασμού μέσα από σύμβολα, μεταφορές και αισθήσεις.</p>
+        </div>
+
+        <!-- Βήμα 1: Σώμα -->
+        <div class="quiz-step active" id="step-1">
+          <div class="step-counter">Ερώτηση 1 από 3</div>
+          <div class="step-question">Πώς νιώθει το σώμα σου σήμερα;</div>
+          <div class="options-grid">
+            <div class="option-card" onclick="chooseOption(1, 'Σφιγμένος κόμπος 🪢')">
+              <span class="option-icon">🪢</span>
+              <span class="option-label">Σφιγμένος κόμπος</span>
+            </div>
+            <div class="option-card" onclick="chooseOption(1, 'Ξεφούσκωτο μπαλόνι 🎈')">
+              <span class="option-icon">🎈</span>
+              <span class="option-label">Ξεφούσκωτο μπαλόνι</span>
+            </div>
+            <div class="option-card" onclick="chooseOption(1, 'Κινούμενη άμμος ⏳')">
+              <span class="option-icon">⏳</span>
+              <span class="option-label">Κινούμενη άμμος</span>
+            </div>
+            <div class="option-card" onclick="chooseOption(1, 'Φτερό στον άνεμο 🪶')">
+              <span class="option-icon">🪶</span>
+              <span class="option-label">Φτερό στον άνεμο</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Βήμα 2: Σχέσεις -->
+        <div class="quiz-step" id="step-2">
+          <div class="step-counter">Ερώτηση 2 από 3</div>
+          <div class="step-question">Πώς βλέπεις τις σχέσεις σου αυτή την περίοδο;</div>
+          <div class="options-grid">
+            <div class="option-card" onclick="chooseOption(2, 'Προστατευτικό τείχος 🧱')">
+              <span class="option-icon">🧱</span>
+              <span class="option-label">Προστατευτικό τείχος</span>
+            </div>
+            <div class="option-card" onclick="chooseOption(2, 'Μπλεγμένο κουβάρι 🧶')">
+              <span class="option-icon">🧶</span>
+              <span class="option-label">Μπλεγμένο κουβάρι</span>
+            </div>
+            <div class="option-card" onclick="chooseOption(2, 'Μια γέφυρα 🌉')">
+              <span class="option-icon">🌉</span>
+              <span class="option-label">Μια γέφυρα</span>
+            </div>
+            <div class="option-card" onclick="chooseOption(2, 'Άδειο τραπέζι 🪑')">
+              <span class="option-icon">🪑</span>
+              <span class="option-label">Άδειο τραπέζι</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Βήμα 3: Λαχτάρα -->
+        <div class="quiz-step" id="step-3">
+          <div class="step-counter">Ερώτηση 3 από 3</div>
+          <div class="step-question">Τι είναι αυτό που λαχταράς περισσότερο;</div>
+          <div class="options-grid">
+            <div class="option-card" onclick="chooseOption(3, 'Μια ανοιχτή πόρτα 🚪')">
+              <span class="option-icon">🚪</span>
+              <span class="option-label">Μια ανοιχτή πόρτα</span>
+            </div>
+            <div class="option-card" onclick="chooseOption(3, 'Μια ζεστή αγκαλιά 🫂')">
+              <span class="option-icon">🫂</span>
+              <span class="option-label">Μια ζεστή αγκαλιά</span>
+            </div>
+            <div class="option-card" onclick="chooseOption(3, 'Μια παύση / σιωπή 🌿')">
+              <span class="option-icon">🌿</span>
+              <span class="option-label">Μια παύση / σιωπή</span>
+            </div>
+            <div class="option-card" onclick="chooseOption(3, 'Έναν λευκό καμβά 🎨')">
+              <span class="option-icon">🎨</span>
+              <span class="option-label">Έναν λευκό καμβά</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Τελικό Αποτέλεσμα / Αναστοχαστικό Μήνυμα -->
+        <div class="quiz-result" id="quiz-result">
+          <div style="text-align: center;">
+            <p style="font-size: 0.95rem; color: #7d7267; margin-bottom: 0.5rem;">Οι εικόνες που διάλεξες σήμερα:</p>
+            <div class="chosen-chips" id="chosen-chips"></div>
+          </div>
+
+          <p>
+            Κάθε εικόνα που διάλεξες είναι ένα κομμάτι της διαδρομής σου — όχι ολόκληρος ο εαυτός σου.
+          </p>
+          <p>
+            Συχνά προσπαθούμε να εξηγήσουμε με τη λογική πράγματα που μόνο το σώμα, η φαντασία και το συναίσθημα μπορούν να χωρέσουν. Ό,τι κι αν αποτύπωσαν οι επιλογές σου σήμερα —βάρος, κούραση, αναζήτηση ή ελπίδα— δεν αποτελεί «λάθος» ούτε ελάττωμα. Είναι μια ζωντανή ένδειξη του πώς απαντάς στον κόσμο γύρω σου.
+          </p>
+          
+          <div class="highlight-box" style="margin: 1.5rem 0;">
+            Σε ευχαριστώ που μοιράστηκες αυτές τις εικόνες.<br>
+            Όπως και στη θεραπευτική σχέση, έτσι κι εδώ, δεν υπάρχει καμία διάθεση να ερμηνεύσουμε βιαστικά ή να «διαγνώσουμε» αυτό που διάλεξες. Υπάρχει μόνο χώρος για περιέργεια, σεβασμό και φροντίδα.
+          </div>
+
+          <p>
+            Τι θα γινόταν αν δίναμε σε αυτές τις εικόνες τον χώρο να μιλήσουν; Αν θέλεις να ξετυλίξουμε μαζί το νήμα πίσω από αυτές, είμαι εδώ.
+          </p>
+
+          <div class="cta-container" style="margin: 2.5rem 0 1rem;">
+            <a href="mailto:darivianaki.despina@gmail.com?subject=Εξερεύνηση%20εικόνων%20-%20Συνεδρία" class="cta-btn">
+              Θέλεις να εξερευνήσουμε αυτή την ιστορία μαζί; — Επικοινώνησε μαζί μου
+            </a>
+          </div>
+
+          <div style="text-align: center;">
+            <button class="reset-btn" onclick="resetQuiz()">↺ Δοκίμασε ξανά το κουίζ</button>
+          </div>
+        </div>
+      </section>
 
     </main>
 
@@ -304,6 +561,41 @@
     </footer>
 
   </div>
+
+  <!-- Script Διαδραστικού Κουίζ -->
+  <script>
+    const choices = {};
+
+    function chooseOption(step, value) {
+      choices[step] = value;
+
+      document.getElementById('step-' + step).classList.remove('active');
+
+      if (step < 3) {
+        document.getElementById('step-' + (step + 1)).classList.add('active');
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      const chipsContainer = document.getElementById('chosen-chips');
+      chipsContainer.innerHTML = `
+        <span class="chip">${choices[1]}</span>
+        <span class="chip">${choices[2]}</span>
+        <span class="chip">${choices[3]}</span>
+      `;
+      document.getElementById('quiz-result').classList.add('active');
+    }
+
+    function resetQuiz() {
+      document.getElementById('quiz-result').classList.remove('active');
+      for (let i = 1; i <= 3; i++) {
+        document.getElementById('step-' + i).classList.remove('active');
+      }
+      document.getElementById('step-1').classList.add('active');
+    }
+  </script>
 
 </body>
 </html>
