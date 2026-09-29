@@ -13,11 +13,11 @@
   <style>
     :root {
       --bg: #faf6f0;           /* Ζεστό γήινο υπόλευκο */
-      --text: #362e28;         /* Βαθύ θερμό ανθρακί για κείμενο */
-      --heading: #221a15;      /* Βαθύ σκούρο για τίτλους */
+      --text: #2f2721;         /* Σκούρο ζεστό ανθρακί για καθαρή ανάγνωση */
+      --heading: #1d1612;      /* Βαθύ καφέ-μαύρο για τίτλους */
       --primary: #b36b4c;      /* Τερρακότα / κεραμιδί */
       --primary-hover: #965337;/* Σκούρα τερρακότα */
-      --card-bg: rgba(255, 255, 255, 0.92); /* Ημιδιάφανο λευκό για καθαρή ανάγνωση */
+      --card-bg: rgba(255, 255, 255, 0.78); /* Προστατευτικό ημιδιάφανο φόντο κειμένου */
       --border: #e8decb;       /* Απαλή γήινη γραμμή */
       --quote-bg: rgba(242, 233, 220, 0.85); /* Ζεστό απαλό φόντο */
     }
@@ -32,14 +32,14 @@
       scroll-behavior: smooth;
     }
 
-    /* 1. ΦΟΝΤΟ ΣΕ ΟΛΗ ΤΗ ΣΕΛΙΔΑ ΧΩΡΙΣ ΚΟΨΙΜΟ & ΧΩΡΙΣ PIXELATION */
+    /* 1. ΠΙΟ ΑΧΝΟ ΦΟΝΤΟ & ΙΣΟΡΡΟΠΙΑ ΑΝΑΓΝΩΣΗΣ */
     body {
       font-family: "Lora", "Georgia", "Times New Roman", serif;
       line-height: 1.85;
       color: var(--text);
       background-color: var(--bg);
       background-image: 
-        linear-gradient(rgba(250, 246, 240, 0.86), rgba(250, 246, 240, 0.90)),
+        linear-gradient(rgba(250, 246, 240, 0.95), rgba(250, 246, 240, 0.97)),
         url('banner-bg.jpg');
       background-size: cover;
       background-position: center center;
@@ -51,17 +51,17 @@
       flex-direction: column;
     }
 
-    /* STICKY NAVBAR ΠΟΥ ΑΠΛΩΝΕΤΑΙ */
+    /* STICKY NAVBAR ΜΕ ΕΙΚΟΝΙΔΙΑ ΔΙΠΛΑ ΣΤΙΣ ΚΑΡΤΕΛΕΣ */
     .navbar {
       position: sticky;
       top: 0;
       width: 100%;
-      background-color: rgba(250, 246, 240, 0.94);
+      background-color: rgba(250, 246, 240, 0.96);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       z-index: 1000;
-      padding: 1rem 2rem;
+      padding: 0.9rem 2rem;
     }
 
     .nav-container {
@@ -83,31 +83,50 @@
 
     .nav-links {
       display: flex;
-      gap: 1.8rem;
+      gap: 1.4rem;
       list-style: none;
+      align-items: center;
     }
 
     .nav-links a {
       color: var(--text);
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 500;
-      transition: color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-links a svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--primary);
+      transition: transform 0.2s ease;
     }
 
     .nav-links a:hover {
       color: var(--primary);
+      background-color: rgba(179, 107, 76, 0.08);
     }
 
-    @media (max-width: 768px) {
+    .nav-links a:hover svg {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 900px) {
       .navbar {
         padding: 0.8rem 1rem;
       }
       .nav-links {
-        gap: 0.8rem;
+        gap: 0.5rem;
       }
       .nav-links a {
         font-size: 0.82rem;
+        padding: 4px 6px;
       }
       .nav-logo {
         display: none;
@@ -117,7 +136,7 @@
       }
     }
 
-    /* 2. ΕΥΡΥΧΩΡΟ / WIDE LAYOUT */
+    /* WIDE LAYOUT */
     .wrapper {
       max-width: 1200px;
       width: 100%;
@@ -158,12 +177,25 @@
       opacity: 0;
       transform: translateY(22px);
       transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-      margin-bottom: 4.5rem;
+      margin-bottom: 4rem;
+      background-color: var(--card-bg);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding: 2.5rem 2.8rem;
+      border-radius: 16px;
+      border: 1px solid rgba(232, 222, 203, 0.7);
+      box-shadow: 0 4px 20px rgba(61, 53, 46, 0.03);
     }
 
     .reveal-section.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    @media (max-width: 600px) {
+      .reveal-section {
+        padding: 1.8rem 1.4rem;
+      }
     }
 
     /* DROP CAPS */
@@ -184,7 +216,7 @@
       font-family: "Playfair Display", Georgia, serif;
       font-size: 1.95rem;
       color: var(--heading);
-      margin-top: 1rem;
+      margin-top: 0.2rem;
       margin-bottom: 1.6rem;
       font-weight: 600;
       border-bottom: 2px solid var(--primary);
@@ -206,7 +238,7 @@
       margin-bottom: 1.5rem;
     }
 
-    /* ΠΡΟΣΩΠΙΚΗ ΦΩΤΟΓΡΑΦΙΑ ΣΤΟ «ΣΧΕΤΙΚΑ ΜΕ ΕΜΕΝΑ» */
+    /* ΠΡΟΣΩΠΙΚΗ ΦΩΤΟΓΡΑΦΙΑ */
     .profile-layout {
       display: grid;
       grid-template-columns: 240px 1fr;
@@ -267,20 +299,20 @@
       color: var(--primary);
     }
 
-    /* 3. BOJACK HORSEMAN ΣΤΟ ΠΛΑΙ ΜΕ ΜΕΓΑΛΥΤΕΡΗ ΕΙΚΟΝΑ (SPLIT LAYOUT) */
+    /* 3. BOJACK HORSEMAN ΣΤΟ ΠΛΑΙ (ΧΩΡΙΣ ΥΠΟΓΡΑΦΗ) */
     .bojack-split-grid {
       display: grid;
       grid-template-columns: 1.3fr 1fr;
       gap: 3.5rem;
       align-items: center;
-      margin: 2rem 0;
+      margin: 1.5rem 0;
     }
 
     .bojack-side-card {
-      background-color: var(--card-bg);
+      background-color: rgba(255, 255, 255, 0.95);
       border: 1px solid var(--border);
       border-radius: 18px;
-      padding: 2.2rem 2rem;
+      padding: 2.4rem 2rem;
       box-shadow: 0 12px 30px rgba(61, 53, 46, 0.08);
       display: flex;
       flex-direction: column;
@@ -295,9 +327,9 @@
       border-radius: 50%;
       border: 5px solid #ffffff;
       overflow: hidden;
-      box-shadow: 0 8px 20px rgba(179, 107, 76, 0.2);
+      box-shadow: 0 8px 22px rgba(179, 107, 76, 0.22);
       background-color: #faf6f0;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.6rem;
     }
 
     .bojack-large-avatar img {
@@ -309,31 +341,18 @@
 
     .bojack-quote-title {
       font-family: "Playfair Display", Georgia, serif;
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: 600;
       font-style: italic;
       color: var(--heading);
       line-height: 1.45;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.9rem;
     }
 
     .bojack-quote-greek {
-      font-size: 0.95rem;
+      font-size: 0.98rem;
       color: #6d6257;
       line-height: 1.5;
-      margin-bottom: 0.8rem;
-    }
-
-    .bojack-badge {
-      display: inline-block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--primary);
-      background-color: var(--quote-bg);
-      padding: 0.3rem 0.9rem;
-      border-radius: 20px;
     }
 
     @media (max-width: 900px) {
@@ -348,20 +367,24 @@
     }
 
     .highlight-box {
-      background-color: var(--card-bg);
+      background-color: #ffffff;
       border-left: 4px solid var(--primary);
       padding: 1.6rem 2rem;
       margin: 2.4rem 0;
       border-radius: 0 12px 12px 0;
-      box-shadow: 0 6px 18px rgba(61, 53, 46, 0.05);
+      box-shadow: 0 4px 16px rgba(61, 53, 46, 0.04);
       font-size: 1.18rem;
       color: var(--heading);
       line-height: 1.7;
     }
 
     .cta-container {
-      margin: 3.5rem 0;
+      margin: 3rem 0 1.5rem;
       text-align: center;
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
     }
 
     .cta-btn {
@@ -385,9 +408,9 @@
       box-shadow: 0 6px 18px rgba(179, 107, 76, 0.35);
     }
 
-    /* 4. ΚΑΡΤΕΛΕΣ ΚΟΥΙΖ ΜΕ ΕΙΚΟΝΙΔΙΑ ΚΑΙ WIDE GRID */
+    /* 4. ΚΑΡΤΕΛΕΣ ΚΟΥΙΖ ΜΕ ΕΙΚΟΝΙΔΙΑ */
     .quiz-section {
-      background-color: var(--card-bg);
+      background-color: rgba(255, 255, 255, 0.92);
       border: 1px solid var(--border);
       border-radius: 18px;
       padding: 3rem 2.5rem;
@@ -465,9 +488,8 @@
       }
     }
 
-    /* ΚΑΡΤΕΛΑ ΜΕ ΕΙΚΟΝΙΔΙΟ ΔΙΠΛΑ */
     .option-card {
-      background-color: var(--bg);
+      background-color: #ffffff;
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 1.2rem 1.6rem;
@@ -555,7 +577,7 @@
 
     /* FOOTER */
     footer {
-      background-color: rgba(250, 246, 240, 0.95);
+      background-color: rgba(250, 246, 240, 0.96);
       border-top: 1px solid var(--border);
       padding: 3.5rem 2rem 3rem;
       margin-top: 4rem;
@@ -613,17 +635,47 @@
 </head>
 <body>
 
-  <!-- STICKY NAVBAR -->
+  <!-- STICKY NAVBAR ΜΕ ΕΙΚΟΝΙΔΙΑ ΔΙΠΛΑ ΣΤΙΣ ΚΑΡΤΕΛΕΣ -->
   <nav class="navbar">
     <div class="nav-container">
       <a href="#" class="nav-logo">Δέσποινα Δαριβιανάκη</a>
       <ul class="nav-links">
-        <li><a href="#about">Σχετικά με Εμένα</a></li>
-        <li><a href="#landscape">Το Σύγχρονο Τοπίο</a></li>
-        <li><a href="#perspective">Η Ματιά</a></li>
-        <li><a href="#studies">Σπουδές</a></li>
-        <li><a href="#quiz">Παιχνίδι</a></li>
-        <li><a href="#contact">Επικοινωνία</a></li>
+        <li>
+          <a href="#about">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            <span>Σχετικά με Εμένα</span>
+          </a>
+        </li>
+        <li>
+          <a href="#landscape">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            <span>Το Σύγχρονο Τοπίο</span>
+          </a>
+        </li>
+        <li>
+          <a href="#perspective">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            <span>Η Ματιά</span>
+          </a>
+        </li>
+        <li>
+          <a href="#studies">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+            <span>Σπουδές</span>
+          </a>
+        </li>
+        <li>
+          <a href="#quiz">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.22 19.59 10.56 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
+            <span>Παιχνίδι</span>
+          </a>
+        </li>
+        <li>
+          <a href="#contact">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <span>Επικοινωνία</span>
+          </a>
+        </li>
       </ul>
     </div>
   </nav>
@@ -668,7 +720,7 @@
         </p>
       </section>
 
-      <!-- ΕΝΟΤΗΤΑ 2: Το Σύγχρονο Τοπίο & BoJack Horseman στο πλάι -->
+      <!-- ΕΝΟΤΗΤΑ 2: Το Σύγχρονο Τοπίο & BoJack Horseman στο πλάι (Χωρίς υπογραφή) -->
       <section id="landscape" class="reveal-section">
         <h2>Το Άτομο μέσα στο Σύγχρονο Τοπίο</h2>
         
@@ -683,7 +735,7 @@
             </p>
           </div>
 
-          <!-- Δεξιά Στήλη: Ο BoJack Horseman στο πλάι με μεγαλύτερη εικόνα -->
+          <!-- Δεξιά Στήλη: Ο BoJack Horseman στο πλάι (ΧΩΡΙΣ ΥΠΟΓΡΑΦΗ) -->
           <div class="bojack-side-card">
             <div class="bojack-large-avatar">
               <img src="bojack.png" alt="BoJack Horseman" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/d/dc/BoJack_Horseman_character.png'">
@@ -694,7 +746,6 @@
             <div class="bojack-quote-greek">
               Σε αυτόν τον τρομακτικό κόσμο, το μόνο που έχουμε είναι οι συνδέσεις που δημιουργούμε.
             </div>
-            <span class="bojack-badge">BoJack Horseman</span>
           </div>
         </div>
       </section>
@@ -769,7 +820,7 @@
         </p>
       </section>
 
-      <!-- ΔΙΑΔΡΑΣΤΙΚΟ ΠΑΙΧΝΙΔΙ / ΚΟΥΙΖ ΜΕ ΕΙΚΟΝΙΔΙΑ ΔΙΠΛΑ ΣΤΙΣ ΚΑΡΤΕΣ -->
+      <!-- ΔΙΑΔΡΑΣΤΙΚΟ ΠΑΙΧΝΙΔΙ / ΚΟΥΙΖ -->
       <section class="quiz-section reveal-section" id="quiz">
         <div class="quiz-header">
           <h2>Διάλεξε μια εικόνα: Πώς νιώθεις μέσα στον κόσμο σήμερα;</h2>
@@ -959,7 +1010,7 @@
       document.getElementById('step-1').classList.add('active');
     }
 
-    // Scroll Reveal Παρατηρητής
+    // Scroll Reveal Observer
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -967,7 +1018,7 @@
         }
       });
     }, {
-      threshold: 0.10
+      threshold: 0.08
     });
 
     document.querySelectorAll('.reveal-section').forEach(section => {
