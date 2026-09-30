@@ -218,6 +218,27 @@
       font-weight: 600;
     }
 
+    /* ΤΟΠΟΘΕΣΙΑ ΣΤΗΝ ΚΕΦΑΛΙΔΑ */
+    .location-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.95rem;
+      color: #554a41;
+      margin-top: 1.3rem;
+    }
+
+    .location-badge svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--primary);
+      flex-shrink: 0;
+    }
+
     @media (max-width: 768px) {
       h1 {
         font-size: 2.6rem;
@@ -713,6 +734,12 @@
       align-items: center;
     }
 
+    .footer-location {
+      font-size: 0.98rem;
+      color: #554a41;
+      margin-top: 0.4rem;
+    }
+
     /* PROGRESS PRIDE BADGE ΣΤΟ FOOTER */
     .footer-pride-badge {
       display: inline-flex;
@@ -845,6 +872,14 @@
       <div class="subtitle">
         <strong>Μια συνάντηση πέρα από ετικέτες</strong>, όπου το σύμπτωμα ακούγεται, κατανοείται και φροντίζεται από κοινού.
       </div>
+      
+      <!-- ΤΟΠΟΘΕΣΙΑ: ΗΡΑΚΛΕΙΟ ΚΡΗΤΗΣ -->
+      <div class="location-badge">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg>
+        <span>Δια ζώσης συνεδρίες στο <strong>Ηράκλειο Κρήτης</strong> &amp; Διαδικτυακά (Online)</span>
+      </div>
     </header>
 
     <main>
@@ -898,7 +933,7 @@
               <img src="bojack.png" alt="BoJack Horseman" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/d/dc/BoJack_Horseman_character.png'">
             </div>
             <div class="bojack-quote-title">
-              «In this terrifying world, all we have are the connections that we make.»
+              «In this terrifying world, all we have is the connections we make.»
             </div>
             <div class="bojack-quote-greek">
               Σε αυτόν τον τρομακτικό κόσμο, το μόνο που έχουμε είναι οι συνδέσεις που δημιουργούμε.
@@ -1107,7 +1142,7 @@
   <footer>
     <div class="footer-content">
       <p><strong>Δέσποινα Δαριβιανάκη</strong> | Αδειούχος Ψυχολόγος &amp; Εκπαιδευόμενη Συστημική Ψυχοθεραπεύτρια</p>
-      <p style="margin-top: 0.3rem;">Δια ζώσης &amp; διαδικτυακές συνεδρίες</p>
+      <p class="footer-location">Ηράκλειο Κρήτης • Δια ζώσης &amp; διαδικτυακές συνεδρίες</p>
       
       <!-- PROGRESS PRIDE SAFE SPACE BADGE ΣΤΟ FOOTER -->
       <div class="footer-pride-badge">
